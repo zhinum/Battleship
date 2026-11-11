@@ -3,8 +3,8 @@ export class Ship {
     this.length = length;
     this.hitCount = 0;
     this.ifSunk = false;
-    this.startCoordinate = null;
-    this.endCoordinate = null;
+    this.horCoordinate = null; // hor = horizontal, ver = vertical  ::::: they are coordinates.
+    this.verCoordinate = null;
   }
 
   hit() {
@@ -21,13 +21,13 @@ export class Ship {
 
     return this.ifSunk;
   }
-  setCoordinates(start, end) {
-    this.startCoordinate = start;
-    this.endCoordinate = end;
+  setCoordinates(hor, ver) {
+    this.horCoordinate = hor;
+    this.verCoordinate = ver;
   }
 
   coordinates() {
-    return [this.startCoordinate, this.endCoordinate];
+    return [this.horCoordinate, this.verCoordinate];
   }
 }
 

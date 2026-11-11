@@ -5,19 +5,20 @@ export class GameBoard {
     });
   }
   //gameBoard is an adjacency matrix numbered 0 to 10
-  addEdges(start, end) {
-    this.board[start][end] = 1;
-    this.board[end][start] = 1;
+  // hor = horizontal, ver = vertical  ::::: they are coordinates.
+  addEdges(hor, ver) {
+    this.board[hor][ver] = 1;
+    this.board[hor][ver] = 1;
   }
   //edges are added in a directed manner.
 
-  hasEdges(start, end) {
-    this.board[start][end] === 1 ? true : false;
+  hasEdges(hor, ver) {
+    this.board[hor][ver] === 1 ? true : false;
   }
 
   placeShip(coordinateArray) {
-    let start = coordinateArray[0];
-    let end = coordinateArray[1];
-    this.addEdges(start, end);
+    let hor = coordinateArray[0];
+    let ver = coordinateArray[1];
+    this.addEdges(hor, ver);
   }
 }
