@@ -28,5 +28,11 @@ describe("ship testing", () => {
       destroyer.hit();
       expect(destroyer.isSunk()).toBe(true);
     });
+
+    test("correctly sets coordinates", () => {
+      destroyer.setCoordinates(3, 4);
+      expect(destroyer.startCoordinate).toBe(3);
+      expect(destroyer.endCoordinate).toBe(4);
+    });
   });
 });
