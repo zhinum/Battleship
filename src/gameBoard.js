@@ -1,3 +1,4 @@
+import { Ship } from "./ship.js";
 export class GameBoard {
   constructor() {
     this.board = Array.from({ length: 10 }, () => Array(10).fill(0));
@@ -18,35 +19,36 @@ export class GameBoard {
   }
 
   placeShip(hor, ver, length, direction) {
-    let range;
     if (direction === "vertical") {
-      range = 10 - hor;
-      if (range >= length) {
+      const horRange = 9 - hor;
+      if (horRange >= length) {
         for (let i = 1; i <= length; i++) {
           this.addEdges(hor++, ver, length);
         }
       } else {
-        const behindShip = length - range;
-        for (let i = 1; i <= range; i++) {
-          this.addEdges(hor++, ver);
+        let originalHor = hor;
+        const behindShip = length - horRange;
+        for (let i = 1; i <= horRange; i++) {
+          this.addEdges(hor++, ver, length);
         }
         for (let i = 1; i <= behindShip; i++) {
-          this.addEdges(hor--, ver);
+          this.addEdges(originalHor--, ver, length);
         }
       }
     } else {
-      range = 10 - ver;
-      if (range >= length) {
+      const verRange = 9 - ver;
+      if (verRange >= length) {
         for (let i = 1; i <= length; i++) {
           this.addEdges(hor, ver++, length);
         }
       } else {
-        const behindShip = length - range;
-        for (let i = 1; i <= range; i++) {
-          this.addEdges(hor, ver++);
+        let originalVer = ver;
+        const behindShip = length - verRange;
+        for (let i = 1; i <= verRange; i++) {
+          this.addEdges(hor, ver++, length);
         }
         for (let i = 1; i <= behindShip; i++) {
-          this.addEdges(hor, ver--);
+          this.addEdges(hor, originalVer--, length);
         }
       }
     }
@@ -57,3 +59,9 @@ export class GameBoard {
     }
   }
 }
+
+const player1Board = new GameBoard();
+const destroyer = new Ship(4, "horizontal");
+destroyer.setCoordinates(3, 8);
+
+player1Board.placeShip(1, 8, 4, destroyer.direction);
