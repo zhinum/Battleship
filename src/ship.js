@@ -1,10 +1,11 @@
 export class Ship {
-  constructor(length) {
+  constructor(length, direction) {
     this.length = length;
     this.hitCount = 0;
     this.ifSunk = false;
     this.horCoordinate = null; // hor = horizontal, ver = vertical  ::::: they are coordinates.
     this.verCoordinate = null;
+    this.direction = direction;
   }
 
   hit() {
@@ -26,8 +27,12 @@ export class Ship {
     this.verCoordinate = ver;
   }
 
-  coordinates() {
-    return [this.horCoordinate, this.verCoordinate];
+  horcoordinates() {
+    return this.horCoordinate;
+  }
+
+  verCoordinates() {
+    return this.verCoordinate;
   }
 }
 
