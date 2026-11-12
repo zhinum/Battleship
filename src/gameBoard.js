@@ -22,30 +22,30 @@ export class GameBoard {
     if (direction === "vertical") {
       range = 10 - hor;
       if (range >= length) {
-        for (let i = 0; i <= length; i++) {
+        for (let i = 1; i <= length; i++) {
           this.addEdges(hor++, ver, length);
         }
       } else {
         const behindShip = length - range;
-        for (let i = 0; i <= range; i++) {
+        for (let i = 1; i <= range; i++) {
           this.addEdges(hor++, ver);
         }
-        for (let i = 0; i <= behindShip; i++) {
+        for (let i = 1; i <= behindShip; i++) {
           this.addEdges(hor--, ver);
         }
       }
     } else {
       range = 10 - ver;
       if (range >= length) {
-        for (let i = 0; i <= length; i++) {
+        for (let i = 1; i <= length; i++) {
           this.addEdges(hor, ver++, length);
         }
       } else {
         const behindShip = length - range;
-        for (let i = 0; i <= range; i++) {
+        for (let i = 1; i <= range; i++) {
           this.addEdges(hor, ver++);
         }
-        for (let i = 0; i <= behindShip; i++) {
+        for (let i = 1; i <= behindShip; i++) {
           this.addEdges(hor, ver--);
         }
       }
