@@ -9,7 +9,6 @@ export class GameBoard {
   addEdges(hor, ver, length) {
     this.rangeCheck(hor, ver);
     this.board[hor][ver] = length;
-    this.board[ver][hor] = length;
   }
   //edges are added in a directed manner.
 
@@ -20,7 +19,7 @@ export class GameBoard {
 
   placeShip(hor, ver, length, direction) {
     let range;
-    if (direction === "horizontal") {
+    if (direction === "vertical") {
       range = 10 - hor;
       if (range >= length) {
         for (let i = 0; i <= length; i++) {
