@@ -28,7 +28,8 @@ export class GameBoard {
       } else {
         let originalHor = hor;
         const behindShip = length - horRange;
-        for (let i = 1; i <= horRange; i++) {
+
+        for (let i = 0; i <= horRange; i++) {
           this.addEdges(hor++, ver, length);
         }
         for (let i = 1; i <= behindShip; i++) {
@@ -44,7 +45,8 @@ export class GameBoard {
       } else {
         let originalVer = ver;
         const behindShip = length - verRange;
-        for (let i = 1; i <= verRange; i++) {
+
+        for (let i = 0; i <= verRange; i++) {
           this.addEdges(hor, ver++, length);
         }
         for (let i = 1; i <= behindShip; i++) {
@@ -54,7 +56,7 @@ export class GameBoard {
     }
   }
   rangeCheck(hor, ver) {
-    if (hor < 0 || hor > 10 || ver < 0 || ver > 10) {
+    if (hor < 0 || hor > 9 || ver < 0 || ver > 9) {
       throw new Error("out of range");
     }
   }
