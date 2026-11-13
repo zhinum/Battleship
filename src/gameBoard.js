@@ -7,56 +7,32 @@ export class GameBoard {
   // hor = horizontal, ver = vertical  ::::: they are coordinates.
   //to be able to tell which ship is which i placed their length number on the matrix. this is against the rule of adjacency matrix,
   //  so this is not an adjacency matrix, ITS MY GAME BOARD
-  addEdges(hor, ver, length) {
+  addEdges(ver, hor, length) {
     this.rangeCheck(hor, ver);
-    this.board[hor][ver] = length;
+    this.board[ver][hor] = length;
   }
   //edges are added in a directed manner.
 
-  hasEdges(hor, ver) {
-    this.rangeCheck(hor, ver);
+  hasEdges(ver, hor) {
+    this.rangeCheck(ver, hor);
     return this.board[hor][ver] === 1 ? true : false;
   }
 
-  placeShip(hor, ver, length, direction) {
-    if (direction === "vertical") {
-      const horRange = 9 - hor;
-      if (horRange >= length) {
-        for (let i = 1; i <= length; i++) {
-          this.addEdges(hor++, ver, length);
-        }
-      } else {
-        let originalHor = hor;
-        const behindShip = length - horRange;
-
-        for (let i = 0; i <= horRange; i++) {
-          this.addEdges(hor++, ver, length);
-        }
-        for (let i = 1; i <= behindShip; i++) {
-          this.addEdges(originalHor--, ver, length);
-        }
+  placeShip([sVer, sHor], [eVer, eHor], direction) {
+    // shor = start horizontal, sver = start vertical  ::::: they are coordinates
+    //ehor = end horizontal, ever = end vertical
+    if (direction === "horizontal") {
+      while (sHor !== eHor) {
+        this.addEdges(sVer, sHor++);
       }
     } else {
-      const verRange = 9 - ver;
-      if (verRange >= length) {
-        for (let i = 1; i <= length; i++) {
-          this.addEdges(hor, ver++, length);
-        }
-      } else {
-        let originalVer = ver;
-        const behindShip = length - verRange;
-
-        for (let i = 0; i <= verRange; i++) {
-          this.addEdges(hor, ver++, length);
-        }
-        for (let i = 1; i <= behindShip; i++) {
-          this.addEdges(hor, originalVer--, length);
-        }
+      while (sVer !== eVer) {
+        this.addEdges(sVer++, sHor);
       }
     }
   }
-  rangeCheck(hor, ver) {
-    if (hor < 0 || hor > 9 || ver < 0 || ver > 9) {
+  rangeCheck(ver, hor) {
+    if (ver < 0 || hor > 9 || ver < 0 || ver > 9) {
       throw new Error("out of range");
     }
   }
