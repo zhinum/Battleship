@@ -2,15 +2,16 @@ import { Ship } from "./ship.js";
 describe("ship testing", () => {
   let destroyer;
   beforeEach(() => {
-    destroyer = new Ship(4);
+    destroyer = new Ship(4, "horizontal");
   });
   test("Correctly create ship objects", () => {
     expect(destroyer).toEqual({
       length: 4,
       hitCount: 0,
       ifSunk: false,
-      startCoordinate: null,
-      endCoordinate: null,
+      startCoordinates: null,
+      endCoordinates: null,
+      direction: "horizontal",
     });
   });
 
@@ -30,9 +31,9 @@ describe("ship testing", () => {
     });
 
     test("correctly sets coordinates", () => {
-      destroyer.setCoordinates(3, 4);
-      expect(destroyer.startCoordinate).toBe(3);
-      expect(destroyer.endCoordinate).toBe(4);
+      destroyer.setCoordinates([3, 4], [3, 8]);
+      expect(destroyer.startCoord()).toEqual([3, 4]);
+      expect(destroyer.endCoord()).toEqual([3, 8]);
     });
   });
 });
