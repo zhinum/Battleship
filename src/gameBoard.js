@@ -19,18 +19,39 @@ export class GameBoard {
   }
 
   placeShip([sVer, sHor], [eVer, eHor], length, direction) {
+    if (this.checkShip([sVer, sHor], [eVer, eHor], direction)) {
+      return "Coordinate already occupied";
+    }
     // shor = start horizontal, sver = start vertical  ::::: they are coordinates
     //ehor = end horizontal, ever = end vertical
     if (direction === "horizontal") {
-      while (sHor !== eHor + 1) {
+      while (sHor !== eHor) {
         this.addEdges(sVer, sHor++, length);
       }
     } else {
-      while (sVer !== eVer + 1) {
+      while (sVer !== eVer) {
         this.addEdges(sVer++, sHor, length);
       }
     }
   }
+  checkShip([sVer, sHor], [eVer, eHor], direction) {
+    // shor = start horizontal, sver = start vertical  ::::: they are coordinates
+    //ehor = end horizontal, ever = end vertical
+    if (direction === "horizontal") {
+      while (sHor !== eHor) {
+        if (this.hasEdges(sVer, sHor++)) {
+          return true;
+        }
+      }
+    } else {
+      while (sVer !== eVer) {
+        if (this.hasEdges(sVer++, sHor)) {
+          return true;
+        }
+      }
+    }
+  }
+
   rangeCheck(ver, hor) {
     if (ver < 0 || hor > 9 || ver < 0 || ver > 9) {
       throw new Error("out of range");
