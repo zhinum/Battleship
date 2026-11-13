@@ -15,19 +15,19 @@ export class GameBoard {
 
   hasEdges(ver, hor) {
     this.rangeCheck(ver, hor);
-    return this.board[hor][ver] === 1 ? true : false;
+    return this.board[ver][hor] !== 0 ? true : false;
   }
 
-  placeShip([sVer, sHor], [eVer, eHor], direction) {
+  placeShip([sVer, sHor], [eVer, eHor], length, direction) {
     // shor = start horizontal, sver = start vertical  ::::: they are coordinates
     //ehor = end horizontal, ever = end vertical
     if (direction === "horizontal") {
-      while (sHor !== eHor) {
-        this.addEdges(sVer, sHor++);
+      while (sHor !== eHor + 1) {
+        this.addEdges(sVer, sHor++, length);
       }
     } else {
-      while (sVer !== eVer) {
-        this.addEdges(sVer++, sHor);
+      while (sVer !== eVer + 1) {
+        this.addEdges(sVer++, sHor, length);
       }
     }
   }
@@ -38,8 +38,9 @@ export class GameBoard {
   }
 }
 
-const player1Board = new GameBoard();
+/* const player1Board = new GameBoard();
 const destroyer = new Ship(4, "horizontal");
 destroyer.setCoordinates(3, 8);
 
 player1Board.placeShip(1, 8, 4, destroyer.direction);
+ */
