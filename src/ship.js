@@ -3,8 +3,8 @@ export class Ship {
     this.length = length;
     this.hitCount = 0;
     this.ifSunk = false;
-    this.horCoordinate = null; // hor = horizontal, ver = vertical  ::::: they are coordinates.
-    this.verCoordinate = null;
+    this.startCordinates = null; //
+    this.endCoordinates = null;
     this.direction = direction;
   }
 
@@ -22,17 +22,17 @@ export class Ship {
 
     return this.ifSunk;
   }
-  setCoordinates(hor, ver) {
-    this.horCoordinate = hor;
-    this.verCoordinate = ver;
+  setCoordinates([sHor, sVer], [eHor, eVer]) {
+    this.startCordinates = [sHor, sVer]; // shor = start horizontal, sver = start vertical  ::::: they are coordinates
+    this.endCoordinates = [eHor, eVer]; // ehor = end horizontal, ever = end vertical
   }
 
-  horcoordinates() {
-    return this.horCoordinate;
+  startCordinatess() {
+    return this.startCordinates;
   }
 
-  verCoordinates() {
-    return this.verCoordinate;
+  endCoordinates() {
+    return this.endCoordinates;
   }
 }
 
