@@ -22,7 +22,7 @@ describe("gameBoard test", () => {
 
   describe("gameBoard board functions", () => {
     test("addEdge add directed edges to matrix", () => {
-      gBoard.addEdges(3, 7);
+      gBoard.addEdges(3, 7, 4);
 
       expect(gBoard.hasEdges(3, 7)).toBe(true);
     });
@@ -38,7 +38,7 @@ describe("gameBoard test", () => {
 
   describe("ship placement test on gameBoard", () => {
     test("correct ship placement according to coordinates", () => {
-      gBoard.placeShip(2, 5, 4, "horizontal");
+      gBoard.placeShip([2, 5], [2, 9], 4, "horizontal");
       expect(gBoard.board).toEqual([
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -53,24 +53,32 @@ describe("gameBoard test", () => {
       ]);
     });
     test("correctly place ship behind set coordinate if out of range", () => {
-      gBoard.placeShip(3, 8, 4, "horizontal");
-      gBoard.placeShip(3, 0, 5, "vertical");
-      gBoard.placeShip(6, 3, 3, "horizontal");
-      gBoard.placeShip(8, 7, 6, "vertical");
-      gBoard.placeShip(0, 9, 2, "vertical");
+      gBoard.placeShip([3, 4], [3, 8], 4, "horizontal");
+      gBoard.placeShip([3, 0], [8, 0], 5, "vertical");
+      gBoard.placeShip([6, 3], [6, 6], 3, "horizontal");
+      gBoard.placeShip([3, 8], [9, 8], 6, "vertical");
+      gBoard.placeShip([0, 9], [2, 9], 2, "vertical");
 
       expect(gBoard.board).toEqual([
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [5, 0, 0, 0, 0, 0, 4, 4, 4, 4],
-        [5, 0, 0, 0, 0, 0, 0, 6, 0, 0],
-        [5, 0, 0, 0, 0, 0, 0, 6, 0, 0],
-        [5, 0, 0, 3, 3, 3, 0, 6, 0, 0],
-        [5, 0, 0, 0, 0, 0, 0, 6, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 6, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 6, 0, 0],
+        //0..1..2..3..4..5..6..7..8..9
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 2], //0
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 2], //1
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], //2
+        [5, 0, 0, 0, 4, 4, 4, 4, 6, 0], //3
+        [5, 0, 0, 0, 0, 0, 0, 0, 6, 0], //4
+        [5, 0, 0, 0, 0, 0, 0, 0, 6, 0], //5
+        [5, 0, 0, 3, 3, 3, 0, 0, 6, 0], //6
+        [5, 0, 0, 0, 0, 0, 0, 0, 6, 0], //7
+        [0, 0, 0, 0, 0, 0, 0, 0, 6, 0], //8
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], //9
       ]);
+    });
+    test("check if coordinate is already occupied", () => {
+      gBoard.placeShip([3, 4], [3, 8], 4, "horizontal");
+
+      expect(gBoard.placeShip([3, 5], [3, 9], 5, "horizontal")).toBe(
+        "Coordinate already occupied",
+      );
     });
   });
 });
