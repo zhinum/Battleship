@@ -22,16 +22,16 @@ export class Ship {
 
     return this.ifSunk;
   }
-  setCoordinates([sHor, sVer], [eHor, eVer]) {
-    this.startCordinates = [sHor, sVer]; // shor = start horizontal, sver = start vertical  ::::: they are coordinates
-    this.endCoordinates = [eHor, eVer]; // ehor = end horizontal, ever = end vertical
+  setCoordinates([sVer, sHor], [eHor, eVer]) {
+    this.startCordinates = [sVer, sHor]; // shor = start horizontal, sver = start vertical  ::::: they are coordinates
+    this.endCoordinates = [eVer, eHor]; // ehor = end horizontal, ever = end vertical
   }
 
-  startCordinatess() {
+  startCoord() {
     return this.startCordinates;
   }
 
-  endCoordinates() {
+  endCoord() {
     return this.endCoordinates;
   }
 }
